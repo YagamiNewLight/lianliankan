@@ -1,0 +1,63 @@
+* {
+  box-sizing: border-box;
+}
+.component {
+  margin-top: -4px;
+  position: relative;
+  height: 50px;
+  width: 50px;
+  /* border:1px solid red; */
+}
+.component.ele {
+  border: 1px solid red;
+}
+.row {
+  margin-top: 10px;
+  width: 200px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.component.ele::after {
+  display: none;
+  content: "";
+  position: absolute;
+  transform: translateY(-50%);
+  background-color: blue;
+  width: 80px;
+  height: 35px;
+  z-index: -1;
+}
+.component.ele.starter::after {
+  content: "";
+  position: absolute;
+  transform: scale(0.8);
+  background-color: blue;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.component.ele.right::after {
+  display: block;
+  top: 25px;
+  left: 4px;
+}
+.component.ele.left::after {
+  display: block;
+  top: 25px;
+  right: 4px;
+}
+.component.ele.down::after {
+  display: block;
+  top: 43px;
+  right: 4px;
+  width: 40px;
+  height: 80px;
+}
+.component.ele.top::after {
+  display: block;
+  top: 0px;
+  right: 4px;
+  width: 40px;
+  height: 90px;
+}
