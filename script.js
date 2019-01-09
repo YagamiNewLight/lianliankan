@@ -21,15 +21,11 @@ const setNewStarter = currentNode => {
 const originCoords = [
   { x: 0, y: 0 },
   { x: 1, y: 0 },
-  { x: 2, y: 0 },
-  { x: 0, y: 1 },
   { x: 1, y: 1 },
   { x: 2, y: 1 },
-  { x: 0, y: 2 },
-  { x: 1, y: 2 },
-  { x: 2, y: 2 }
+  { x: 0, y: 2 }
 ];
-let starterCoord = { x: 0, y: 0 };
+let starterCoord = { x: 1, y: 1 };
 let starter;
 let path;
 const getCoordinates = component => {
@@ -54,7 +50,8 @@ const handleClick = function(event) {
   const starterCoordinates = getCoordinates(starter).map(Number);
   if (
     starterCoordinates[0] === nodeCoodinates[0] &&
-    starterCoordinates[1] + 1 === nodeCoodinates[1]
+    starterCoordinates[1] + 1 === nodeCoodinates[1] &&
+    currentNode.classList.contains("ele")
   ) {
     starter.classList.add("right");
     path.push(currentNode);
@@ -62,7 +59,8 @@ const handleClick = function(event) {
   }
   if (
     starterCoordinates[0] - 1 === nodeCoodinates[0] &&
-    starterCoordinates[1] === nodeCoodinates[1]
+    starterCoordinates[1] === nodeCoodinates[1] &&
+    currentNode.classList.contains("ele")
   ) {
     starter.classList.add("top");
     path.push(currentNode);
@@ -70,7 +68,8 @@ const handleClick = function(event) {
   }
   if (
     starterCoordinates[0] + 1 === nodeCoodinates[0] &&
-    starterCoordinates[1] === nodeCoodinates[1]
+    starterCoordinates[1] === nodeCoodinates[1] &&
+    currentNode.classList.contains("ele")
   ) {
     starter.classList.add("down");
     path.push(currentNode);
@@ -78,7 +77,8 @@ const handleClick = function(event) {
   }
   if (
     starterCoordinates[0] === nodeCoodinates[0] &&
-    starterCoordinates[1] - 1 === nodeCoodinates[1]
+    starterCoordinates[1] - 1 === nodeCoodinates[1] &&
+    currentNode.classList.contains("ele")
   ) {
     starter.classList.add("left");
     path.push(currentNode);
