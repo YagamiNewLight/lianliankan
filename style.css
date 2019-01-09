@@ -1,23 +1,37 @@
 * {
   box-sizing: border-box;
 }
+body {
+  height: 100vh;
+  overflow: hidden;
+}
+.container {
+  padding-top: 30vh;
+  border: 1px solid red;
+  height: 100vh;
+  text-align: center;
+}
 .component {
+  float: left;
   margin-top: -4px;
   position: relative;
   height: 50px;
   width: 50px;
+  margin-right: 20px;
   /* border:1px solid red; */
 }
 .component.ele {
   border: 1px solid red;
 }
 .row {
-  margin-top: 10px;
-  width: 200px;
-  display: flex;
-  justify-content: space-around;
+  display: inline-block;
+  margin: 10px 50px;
 }
-
+.row::after {
+  content: "";
+  display: block;
+  clear: both;
+}
 .component.ele::after {
   display: none;
   content: "";

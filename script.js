@@ -1,5 +1,10 @@
-const app = document.querySelector("#app");
-const container = document.querySelector(".container");
+const $ = document.querySelector.bind(document);
+const $$ = selector => {
+  return Array.from(document.querySelectorAll.call(document, selector));
+};
+const arrayCreator = length => Array.from({ length }).map((_, idx) => idx);
+const app = $("#app");
+const container = $(".container");
 const setNewStarter = currentNode => {
   path = path || [];
   starter = currentNode;
@@ -18,13 +23,18 @@ const setNewStarter = currentNode => {
     path = path.filter((_, idx) => idx <= index);
   }
 };
-const originCoords = [
-  { x: 0, y: 0 },
-  { x: 1, y: 0 },
-  { x: 1, y: 1 },
-  { x: 2, y: 1 },
-  { x: 0, y: 2 }
-];
+const coordsCreator = (row, col) => {
+  return arrayCreator(row)
+    .map(row => {
+      return arrayCreator(col).map(col => {
+        return { x: row, y: col };
+      });
+    })
+    .reduce((accum, arr) => accum.concat(arr), []);
+};
+const originCoords = coordsCreator(3, 3);
+console.log(originCoords);
+
 let starterCoord = { x: 1, y: 1 };
 let starter;
 let path;
@@ -108,7 +118,6 @@ const getX = arr => arr.x;
 const getY = arr => arr.y;
 const rowsNum = Math.max(...originCoords.map(getX));
 const colsNum = Math.max(...originCoords.map(getY));
-const arrayCreator = length => Array.from({ length }).map((_, idx) => idx);
 const rowsArray = arrayCreator(rowsNum + 1);
 const colsArray = arrayCreator(colsNum + 1);
 const backgroundDivs = rowsArray.map(row => {
@@ -126,7 +135,7 @@ const renderDivs = divsArr => {
 };
 renderDivs(backgroundDivs);
 
-const components = Array.from(document.querySelectorAll(".component"));
+const components = $$(".component");
 const stones = components.filter(component => {
   const [row, col] = getCoordinates(component);
   return originCoords.find(coord => {
@@ -140,7 +149,7 @@ container.addEventListener("touchstart", handleClick);
 container.addEventListener("touchmove", handleClick);
 starter =
   starter ||
-  Array.from(document.querySelectorAll(".ele")).find(stone => {
+  $$(".ele").find(stone => {
     const [row, col] = getCoordinates(stone);
     return row == starterCoord.x && col == starterCoord.y;
   });
